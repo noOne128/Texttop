@@ -30,7 +30,7 @@ lib/libstrutil.so: lib/libstrutil.o
 	@g++ -shared lib/libstrutil.o -o lib/libstrutil.so
 	@printf "done"
 
-lib/libstrutil.o: str/lib/libstrutil.cpp src/lib/libstrutil.hpp
+lib/libstrutil.o: src/lib/libstrutil.cpp src/lib/libstrutil.hpp
 	@printf "# Compiling lib/libstrutil.o..."
 	@g++ -fPIC -c src/lib/libstrutil.cpp -o lib/libstrutil.o
 	@printf "done"
