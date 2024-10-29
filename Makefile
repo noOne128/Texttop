@@ -45,12 +45,12 @@ build/txtop.o: src/main.cpp | build
 lib/libstrutil.so: lib/libstrutil.o | lib
 	@printf "# Linking lib/libstrutil.o..."
 	@g++ -shared lib/libstrutil.o -o lib/libstrutil.so -Wall -Wextra
-	@printf "done"
+	@printf "done\n"
 
 lib/libstrutil.o: src/lib/libstrutil.cpp src/lib/libstrutil.hpp | lib
 	@printf "# Compiling lib/libstrutil.o..."
 	@g++ -fPIC -c src/lib/libstrutil.cpp -o lib/libstrutil.o -Wall -Wextra
-	@printf "done"
+	@printf "done\n"
 
 run:
 	LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${TEXTTOP_PATH}" "${TEXTTOP_BIN_PATH}/txtop"
