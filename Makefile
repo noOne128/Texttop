@@ -2,8 +2,14 @@ all: bin/txtop
 
 clean:
 	@printf "# Cleaning object files..."
-	@rm build/*.o
-	@printf "done"
+	@rm -f build/*.o
+	@printf "done\n"
+	@printf "# Cleaning binaries..."
+	@rm -f bin/*
+	@printf "done\n"
+	@printf "# Cleaning shared objects..."
+	@rm -f lib/*
+	@printf "done\n"
 
 build:
 	@printf "Creating directory build..."
@@ -22,25 +28,25 @@ lib:
 
 bin/txtop: build/txtop.o lib/libstrutil.so | bin
 	@printf "# Compiling bin/txtpop..."
-	@g++ -MMD -MP build/txtop.o -o bin/txtop
+	@g++ -MMD -MP build/txtop.o -o bin/txtop -Llib -lstrutil -Wall -Wextra
 	@printf "done\n"
 
 build/txtop.o: src/main.cpp | build
 	@printf "# Compiling build/txtop.o..."
-	@g++ src/main.cpp -o build/txtop.o
+	@g++ -c src/main.cpp -o build/txtop.o -Wall -Wextra
 	@printf "done\n"
 
 lib/libstrutil.so: lib/libstrutil.o | lib
 	@printf "# Linking lib/libstrutil.o..."
-	@g++ -shared lib/libstrutil.o -o lib/libstrutil.so
+	@g++ -shared lib/libstrutil.o -o lib/libstrutil.so -Wall -Wextra
 	@printf "done"
 
 lib/libstrutil.o: src/lib/libstrutil.cpp src/lib/libstrutil.hpp | lib
 	@printf "# Compiling lib/libstrutil.o..."
-	@g++ -fPIC -c src/lib/libstrutil.cpp -o lib/libstrutil.o
+	@g++ -fPIC -c src/lib/libstrutil.cpp -o lib/libstrutil.o -Wall -Wextra
 	@printf "done"
 
 run:
-	LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$TEXTTOP_PATH" $TEXTTOP_BIN_PATH/txtop
+	LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${TEXTTOP_PATH}" "${TEXTTOP_BIN_PATH}/txtop"
 
 .PHONY: all clean
