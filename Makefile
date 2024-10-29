@@ -1,15 +1,21 @@
 all: bin/txtop
 
 clean:
-	@printf "# Cleaning object files..."
-	@rm -f build/*.o
-	@printf "done\n"
-	@printf "# Cleaning binaries..."
-	@rm -f bin/*
-	@printf "done\n"
-	@printf "# Cleaning shared objects..."
-	@rm -f lib/*
-	@printf "done\n"
+	@if [ "$(wildcard build/*.o)" ]; then \
+		@printf "# Cleaning object files..."; \
+		@rm -f build/*.o
+		@printf "done\n"
+	fi
+	@if [ "$(wildcard build/*.o)" ]; then \
+		@printf "# Cleaning binaries..."
+		@rm -f bin/*
+		@printf "done\n"
+	fi
+	@if [ "$(wildcard build/*.o)" ]; then \
+		@printf "# Cleaning shared objects..."
+		@rm -f lib/*
+		@printf "done\n"
+	fi
 
 build:
 	@printf "Creating directory build..."
